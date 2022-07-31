@@ -13,10 +13,13 @@
                     <li class="nav-item">
                         <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/errors" routerLinkActive="active">errors</a>
+                    </li>
                 </ng-container>
                 </ul>
 
-                <div class="dropdown" *ngIf="(accountservice.currentUser$) as user" dropdown>
+                <div class="dropdown" *ngIf="(accountservice.currentUser$ | async) as user" dropdown>
                     <a class="dropdown-toggle text-light mt-2" dropdownToggle>Welcome {{user.userName | titlecase}}</a>
                     <div class="dropdown-menu " *dropdownMenu>
                         <a href="" class="dropdown-item">Edit Profile</a>
