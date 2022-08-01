@@ -8,6 +8,7 @@ using System.Security.Authentication;
 
 namespace API.Controllers
 {
+    [Authorize]
     public class UserController : BaseApiController
     {
         public readonly DataContext _context;
@@ -17,15 +18,13 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
-       {
+        {
             var users = _context.Users.ToListAsync();
             return await users;
         }
 
         // api
-        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<AppUser>> GetUser(int id)
         {
