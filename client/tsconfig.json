@@ -20,5 +20,8 @@
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false
-  }
+  },
+  "noImplicitAny": true,
+  "strictNullChecks": true,
+  "strictPropertyInitialization": true
 }
