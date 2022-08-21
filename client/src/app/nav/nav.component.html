@@ -20,9 +20,9 @@
                 </ul>
 
                 <div class="dropdown" *ngIf="(accountservice.currentUser$ | async) as user" dropdown>
-                    <a class="dropdown-toggle text-light mt-2" dropdownToggle>Welcome {{user.userName | titlecase}}</a>
+                    <a class="dropdown-toggle text-light mt-2" dropdownToggle>Welcome {{user.username | titlecase}}</a>
                     <div class="dropdown-menu " *dropdownMenu>
-                        <a href="" class="dropdown-item">Edit Profile</a>
+                        <a routerLink="/member/edit" href="" class="dropdown-item">Edit Profile</a>
                         <div class="dropdown-divider"></div>
                         <a href="" class="dropdown-item" (click)="Logout()">Logout</a>
                     </div>
