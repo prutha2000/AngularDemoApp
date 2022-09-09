@@ -27,19 +27,19 @@ export class MemberDetailComponent implements OnInit {
         imageAnimation: NgxGalleryAnimation.Slide,
         preview:false
       },
-    ]    
+    ]   
   }
 
   getImages(): NgxGalleryImage[] {
-    const imageUrls = [];
+    const imageUrls  = [];
     for(const photo of this.member.photos){
       imageUrls.push({
         small: photo?.url,
         medium: photo?.url,
         big: photo?.url
       })
-      return imageUrls;
     }
+    return imageUrls;
   }
 
   loadMembers() {
