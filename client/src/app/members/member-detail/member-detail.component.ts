@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Member } from 'src/app/Models/Member';
 import { ActivatedRoute } from '@angular/router'
 import { MembersService } from 'src/app/_services/members.service';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
+import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
+import { MessageService } from 'src/app/_services/message.service';
+import { Message } from 'src/app/Models/message';
 
 @Component({
   selector: 'app-member-detail',
@@ -10,10 +13,14 @@ import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov
   styleUrls: ['./member-detail.component.css']
 })
 export class MemberDetailComponent implements OnInit {
+  @ViewChild('memberTabs') memberTabs: TabsetComponent;
   member: Member;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
-  constructor(private router: ActivatedRoute, private memberService: MembersService) { }
+  activeTab: TabDirective;
+  messages: Message[] = [];
+
+  constructor(private router: ActivatedRoute, private memberService: MembersService, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.loadMembers();
@@ -27,7 +34,7 @@ export class MemberDetailComponent implements OnInit {
         imageAnimation: NgxGalleryAnimation.Slide,
         preview:false
       },
-    ]   
+    ];   
   }
 
   getImages(): NgxGalleryImage[] {
@@ -47,6 +54,20 @@ export class MemberDetailComponent implements OnInit {
       this.member = member;
       this.galleryImages = this.getImages();
     })
+  }
+
+  loadMessages(){
+    debugger;
+    this.messageService.getMessageThread(this.member.username).subscribe(messages => {
+      this.messages = messages;
+    })
+  }
+
+  OnTabActivated(data: TabDirective){
+    this.activeTab = data;
+    if(this.activeTab.heading === 'Messages' && this.messages.length === 0){
+      this.loadMessages();
+    }
   }
 
 }
