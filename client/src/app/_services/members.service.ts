@@ -47,7 +47,7 @@ export class MembersService {
     if(response){
       return of(response);
     }
-    let params = paginationHeaders(userParams.pageNumber, userParams.itemsPerPage);
+    let params =  paginationHeaders(userParams.pageNumber, userParams.itemsPerPage);
 
     params = params.append('minAge',userParams.minAge.toString());
     params = params.append('maxAge',userParams.maxAge.toString());
